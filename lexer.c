@@ -8,7 +8,7 @@ int main()
     while(carCour != EOF)
     {
         symSuiv();
-        AfficherToken(symCour);
+        AfficherToken();
     }
     getch();
     return 1;
