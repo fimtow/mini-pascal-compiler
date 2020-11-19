@@ -30,8 +30,16 @@ typedef enum
     PO_TOKEN,
     PF_TOKEN,
     FIN_TOKEN,
-    EG_TOKEN
+    EG_TOKEN,
+    FICHIER_VIDE
 } codesLex;
+typedef enum
+{
+    ERR_CAR_INC,
+    ERR_FIC_VIDE,
+    ERR_IDF_LONG,
+    ERR_CON_LONG,
+} codesErr;
 typedef struct tSymCour
 {
     codesLex code;
@@ -49,4 +57,4 @@ void afficherToken();
 void lireNombre();
 void lireMot();
 void lireCar();
-void erreur();
+void erreur(codesErr err);

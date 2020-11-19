@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 #define MOTSCLEFS 11
 
 int rester = 1;
@@ -9,10 +10,12 @@ char carCour;
 tSymCour symCour;
 FILE* fichier;
 char* motsClefs[] = {"program","const","var","begin","end","if","then","while","Do","read","write"};
+char* messagesErr[] = {"caractere inconnu","fichier vide","indentifiant tres long","constante numerique tres longue"};
 
 void ouvrirFichier(char* file)
 {
     fichier = fopen(file,"r");
+    symCour.code = FICHIER_VIDE;
 }
 
 void lireCaractere()
@@ -61,8 +64,8 @@ void symSuiv()
             case '(' : symCour.code = PO_TOKEN; lireCar(); break;
             case ')' : symCour.code = PF_TOKEN; lireCar(); break;
             case '=' : symCour.code = EG_TOKEN; lireCar(); break;
-            case EOF : symCour.code = FIN_TOKEN; rester = 0; lireCar(); break;
-            default : symCour.code = ERREUR_TOKEN; erreur();
+            case EOF : rester = 0; lireCar(); break;
+            default : symCour.code = ERREUR_TOKEN; erreur(ERR_CAR_INC);
         }
     }
     
@@ -110,10 +113,14 @@ void afficherToken()
 
 void lireNombre()
 {
+    int i = 0;
     do
     {
+        i++;
         lireCaractere();
     } while (isdigit(carCour));
+    if(i>=11)
+        erreur(ERR_CON_LONG);
     symCour.code = NUM_TOKEN;
 }
 
@@ -122,6 +129,8 @@ void lireMot()
     int i=0;
     do
     {
+        if(i>=20)
+            erreur(ERR_IDF_LONG);
         symCour.nom[i] = carCour;
         i++;
         lireCaractere();
@@ -159,14 +168,22 @@ void lireCar()
             if(carCour == '=')
                 symCour.code = SUPEG_TOKEN;
             break;
+        case EOF:
+            if(symCour.code == FICHIER_VIDE)
+                erreur(ERR_FIC_VIDE);
+            else
+                symCour.code = FIN_TOKEN;
+            break;
         default:
             break;
     }
     lireCaractere();
 }
 
-void erreur()
+void erreur(codesErr err)
 {
-    lireCaractere();
+    printf("Erreur de syntax : %s",messagesErr[err]);
+    getchar();
+    exit(1);
 }
 
