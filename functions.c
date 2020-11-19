@@ -1,10 +1,14 @@
 #include "functions.h"
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 #define MOTSCLEFS 11
+
 char carCour;
 tSymCour symCour;
 FILE* fichier;
 char* motsClefs[] = {"program","const","var","begin","end","if","then","while","Do","read","write"};
+
 void ouvrirFichier(char* file)
 {
     fichier = fopen(file,"r");
@@ -13,6 +17,19 @@ void ouvrirFichier(char* file)
 void lireCaractere()
 {
     carCour = fgetc(fichier);
+}
+
+void passeSepa()
+{
+    int commentaire = 0;
+    while(commentaire || carCour==' ' || carCour=='\n' || carCour=='\t' || carCour=='{')
+    {
+        if(carCour=='{')
+            commentaire = 1;
+        if(carCour=='}')
+            commentaire = 0;
+        lireCaractere();
+    }
 }
 
 void symSuiv()
@@ -152,15 +169,3 @@ void erreur()
 
 }
 
-void passeSepa()
-{
-    int commentaire = 0;
-    while(commentaire || carCour==' ' || carCour=='\n' || carCour=='\t' || carCour=='{')
-    {
-        if(carCour=='{')
-            commentaire = 1;
-        if(carCour=='}')
-            commentaire = 0;
-        lireCaractere();
-    }
-}

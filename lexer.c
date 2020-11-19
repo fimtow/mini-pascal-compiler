@@ -8,8 +8,8 @@ int main()
     while(carCour != EOF)
     {
         symSuiv();
-        AfficherToken();
+        afficherToken();
     }
-    getch();
+    getchar();
     return 1;
 }

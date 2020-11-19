@@ -1,5 +1,3 @@
-extern char carCour;
-extern tSymCour symCour;
 typedef enum
 {
     ID_TOKEN,
@@ -38,6 +36,9 @@ typedef struct tSymCour
     codesLex code;
     char nom[20];
 } tSymCour;
+
+extern char carCour;
+extern tSymCour symCour;
 
 void ouvrirFichier(char* file);
 void lireCaractere();
