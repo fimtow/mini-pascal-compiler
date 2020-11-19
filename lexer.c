@@ -5,11 +5,12 @@ int main()
 {
     ouvrirFichier("pascal.p");
     lireCaractere();
-    while(carCour != EOF)
+    while(rester)
     {
         symSuiv();
         afficherToken();
     }
+    
     getchar();
     return 1;
 }

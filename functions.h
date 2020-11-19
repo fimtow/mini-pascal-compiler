@@ -30,6 +30,7 @@ typedef enum
     PO_TOKEN,
     PF_TOKEN,
     FIN_TOKEN,
+    EG_TOKEN
 } codesLex;
 typedef struct tSymCour
 {
@@ -39,6 +40,7 @@ typedef struct tSymCour
 
 extern char carCour;
 extern tSymCour symCour;
+extern int rester;
 
 void ouvrirFichier(char* file);
 void lireCaractere();

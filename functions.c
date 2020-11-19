@@ -4,6 +4,7 @@
 #include <ctype.h>
 #define MOTSCLEFS 11
 
+int rester = 1;
 char carCour;
 tSymCour symCour;
 FILE* fichier;
@@ -59,7 +60,8 @@ void symSuiv()
             case '>' : symCour.code = SUP_TOKEN; lireCar(); break;
             case '(' : symCour.code = PO_TOKEN; lireCar(); break;
             case ')' : symCour.code = PF_TOKEN; lireCar(); break;
-            case EOF : symCour.code = FIN_TOKEN; lireCar(); break;
+            case '=' : symCour.code = EG_TOKEN; lireCar(); break;
+            case EOF : symCour.code = FIN_TOKEN; rester = 0; lireCar(); break;
             default : symCour.code = ERREUR_TOKEN; erreur();
         }
     }
@@ -100,6 +102,7 @@ void afficherToken()
         case PO_TOKEN:printf("PO_TOKEN\n");break;
         case PF_TOKEN:printf("PF_TOKEN\n");break;
         case FIN_TOKEN:printf("FIN_TOKEN\n");break;
+        case EG_TOKEN:printf("EG_TOKEN\n");break;
     default:
         break;
     }
@@ -110,7 +113,7 @@ void lireNombre()
     do
     {
         lireCaractere();
-    } while (isalpha(carCour));
+    } while (isdigit(carCour));
     symCour.code = NUM_TOKEN;
 }
 
@@ -119,7 +122,7 @@ void lireMot()
     int i=0;
     do
     {
-        symCour.nom[0] = carCour;
+        symCour.nom[i] = carCour;
         i++;
         lireCaractere();
     } while (isalpha(carCour) || isdigit(carCour));
@@ -139,33 +142,31 @@ void lireCar()
 {
     switch (carCour)
     {
-    case ':': 
-        lireCaractere();
-        if(carCour != '=')
-            symCour.code = ERREUR_TOKEN;
-        lireCaractere();
-        break;
-    case '<': 
-        lireCaractere();
-        if(carCour == '=')
-            symCour.code = INFEG_TOKEN;
-        else if(carCour == '>')
-            symCour.code = DIFF_TOKEN;
-        lireCaractere();
-        break;
-    case '>': 
-        lireCaractere();
-        if(carCour == '=')
-            symCour.code = SUPEG_TOKEN;
-        lireCaractere();
-        break;
-    default:
-        break;
+        case ':': 
+            lireCaractere();
+            if(carCour != '=')
+                symCour.code = ERREUR_TOKEN;
+            break;
+        case '<': 
+            lireCaractere();
+            if(carCour == '=')
+                symCour.code = INFEG_TOKEN;
+            else if(carCour == '>')
+                symCour.code = DIFF_TOKEN;
+            break;
+        case '>': 
+            lireCaractere();
+            if(carCour == '=')
+                symCour.code = SUPEG_TOKEN;
+            break;
+        default:
+            break;
     }
+    lireCaractere();
 }
 
 void erreur()
 {
-
+    lireCaractere();
 }
 
