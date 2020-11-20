@@ -42,7 +42,21 @@ typedef enum
     ID_ERROR,
     EG_ERROR,
     NUM_ERROR,
-    PV_ERROR
+    PV_ERROR,
+    CONST_VAR_BEGIN_ERROR,
+    PROGRAM_ERROR,
+    PT_ERROR,
+    VAR_BEGIN_ERROR,
+    BEGIN_ERROR,
+    END_ERROR,
+    AFF_ERROR,
+    IF_ERROR,
+    THEN_ERROR,
+    WHILE_ERROR,
+    DO_ERROR,
+    WRITE_ERROR,
+    PO_ERROR,
+    PF_ERROR
 } codesErr;
 typedef struct tSymCour
 {

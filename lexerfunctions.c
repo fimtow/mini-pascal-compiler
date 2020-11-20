@@ -29,9 +29,23 @@ void passeSepa()
     while(commentaire || carCour==' ' || carCour=='\n' || carCour=='\t' || carCour=='{')
     {
         if(carCour=='{')
+        {
+            lireCaractere();
+            if(carCour != '*')
+            {
+                fseek(fichier,-1,SEEK_CUR);
+                carCour = '{';
+                break;
+            }
             commentaire = 1;
-        if(carCour=='}')
-            commentaire = 0;
+        }
+        if(carCour=='*' && commentaire)
+        {
+            lireCaractere();
+            if(carCour == '}')
+                commentaire = 0;
+        }
+            
         lireCaractere();
     }
 }
