@@ -1,5 +1,6 @@
 #include "lexerfunctions.h"
 #include "parserfunctions.h"
+#include <stdio.h>
 
 void testSymbole (codesLex cl, codesErr err){
     if(symCour.code == cl)
@@ -45,7 +46,7 @@ void consts()
         testSymbole(EG_TOKEN,EG_ERROR);
         testSymbole(NUM_TOKEN,NUM_ERROR);
         testSymbole(PV_TOKEN,PV_ERROR);
-        while(symCour.code = ID_TOKEN)
+        while(symCour.code == ID_TOKEN)
         {
             symSuiv();
             testSymbole(EG_TOKEN,EG_ERROR);

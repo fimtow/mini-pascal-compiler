@@ -6,6 +6,7 @@
 #define MOTSCLEFS 11
 
 int rester = 1;
+int line = 1;
 char carCour;
 tSymCour symCour;
 FILE* fichier;
@@ -72,7 +73,10 @@ void passeSepa()
             if(carCour == '}')
                 commentaire = 0;
         }
-            
+        if(carCour == '\n')
+        {
+            line++;
+        }
         lireCaractere();
     }
 }
@@ -223,7 +227,7 @@ void lireCar()
 
 void erreur(codesErr err)
 {
-    printf("Erreur de syntax : %s",messagesErr[err]);
+    printf("[ligne %d] %s",line,messagesErr[err]);
     getchar();
     exit(1);
 }
