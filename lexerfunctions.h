@@ -39,6 +39,10 @@ typedef enum
     ERR_FIC_VIDE,
     ERR_IDF_LONG,
     ERR_CON_LONG,
+    ID_ERROR,
+    EG_ERROR,
+    NUM_ERROR,
+    PV_ERROR
 } codesErr;
 typedef struct tSymCour
 {

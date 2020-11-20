@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "functions.h"
+#include "lexerfunctions.h"
 
 int main()
 {
@@ -10,7 +10,6 @@ int main()
         symSuiv();
         afficherToken();
     }
-    
     getchar();
     return 1;
 }
