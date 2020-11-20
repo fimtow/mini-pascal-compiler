@@ -56,7 +56,11 @@ typedef enum
     DO_ERROR,
     WRITE_ERROR,
     PO_ERROR,
-    PF_ERROR
+    PF_ERROR,
+    READ_ERROR,
+    COND_ERROR,
+    FACT_ERROR,
+    INST_ERROR
 } codesErr;
 typedef struct tSymCour
 {

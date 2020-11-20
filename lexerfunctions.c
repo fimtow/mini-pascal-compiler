@@ -10,7 +10,34 @@ char carCour;
 tSymCour symCour;
 FILE* fichier;
 char* motsClefs[] = {"program","const","var","begin","end","if","then","while","Do","read","write"};
-char* messagesErr[] = {"caractere inconnu","fichier vide","indentifiant tres long","constante numerique tres longue"};
+char* messagesErr[] = {
+    "Erreur lexicale : caractere inconnu",
+    "Erreur lexicale : fichier vide",
+    "Erreur lexicale : indentifiant tres long",
+    "Erreur lexicale : constante numerique tres longue",
+    "Erreur de syntaxe : on expectait un identificateur",
+    "Erreur de syntaxe : on expectait le symbole d'egalite",
+    "Erreur de syntaxe : on expectait un nombre",
+    "Erreur de syntaxe : on expectait un point virgule",
+    "Erreur de syntaxe : on expectait une constante",
+    "Erreur de syntaxe : on expectait un programme",
+    "Erreur de syntaxe : on expectait un point",
+    "Erreur de syntaxe : on expectait une variable",
+    "Erreur de syntaxe : on expectait le mot cle BEGIN",
+    "Erreur de syntaxe : on expectait le mot cle END",
+    "Erreur de syntaxe : on expectait une affectation",
+    "Erreur de syntaxe : on expectait un IF",
+    "Erreur de syntaxe : on expectait le mot cle THEN",
+    "Erreur de syntaxe : on expectait le mot cle WHILE",
+    "Erreur de syntaxe : on expectait le mot cle DO",
+    "Erreur de syntaxe : on expectait le mot WRITE",
+    "Erreur de syntaxe : on expectait une parenthese ouverte",
+    "Erreur de syntaxe : on expectait une parenthese ferme",
+    "Erreur de syntaxe : on expectait le mot cle READ",
+    "Erreur de syntaxe : on expectait une condition",
+    "Erreur de syntaxe : on expectait un facteur",
+    "Erreur de syntaxe : on expectait une instruction"
+};
 
 void ouvrirFichier(char* file)
 {
