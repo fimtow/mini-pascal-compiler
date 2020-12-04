@@ -60,7 +60,9 @@ typedef enum
     READ_ERROR,
     COND_ERROR,
     FACT_ERROR,
-    INST_ERROR
+    INST_ERROR,
+    DOU_DEC,
+    NON_VAR
 } codesErr;
 typedef struct tSymCour
 {

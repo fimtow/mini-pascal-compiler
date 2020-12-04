@@ -1,10 +1,15 @@
 #include "lexerfunctions.h"
 #include "parserfunctions.h"
-#include <stdio.h>
-
+#include <string.h>
+#define NBRIDFS 20
+T_TAB_IDF TAB_IDFS[NBRIDFS];
+int idfIndex = 0;
+char idfCourant[20];
 void testSymbole (codesLex cl, codesErr err){
     if(symCour.code == cl)
     {
+        if(cl == ID_TOKEN)
+            strcpy(symCour.nom,idfCourant);
         symSuiv();
     }
     else
@@ -24,6 +29,7 @@ void program()
 {
     testSymbole(PROGRAM_TOKEN,PROGRAM_ERROR);
     testSymbole(ID_TOKEN,ID_ERROR);
+    ajouterId(idfCourant,TPROG);
     testSymbole(PV_TOKEN,PV_ERROR);
     block();
     testSymbole(PT_TOKEN,PT_ERROR);
@@ -43,11 +49,13 @@ void consts()
     case CONST_TOKEN:
         symSuiv();
         testSymbole(ID_TOKEN,ID_ERROR);
+        ajouterId(idfCourant,TCONST);
         testSymbole(EG_TOKEN,EG_ERROR);
         testSymbole(NUM_TOKEN,NUM_ERROR);
         testSymbole(PV_TOKEN,PV_ERROR);
         while(symCour.code == ID_TOKEN)
         {
+            ajouterId(symCour.nom,TCONST);
             symSuiv();
             testSymbole(EG_TOKEN,EG_ERROR);
             testSymbole(NUM_TOKEN,NUM_ERROR);
@@ -69,10 +77,12 @@ void vars()
     case VAR_TOKEN:
         symSuiv();
         testSymbole(ID_TOKEN,ID_ERROR);
+        ajouterId(idfCourant,TVAR);
         while (symCour.code == VIR_TOKEN)
         {
             symSuiv();
             testSymbole(ID_TOKEN,ID_ERROR);
+            ajouterId(idfCourant,TVAR);
         }
         testSymbole(PV_TOKEN,PV_ERROR);
         break;
@@ -130,6 +140,8 @@ void inst()
 void affec()
 {
     testSymbole(ID_TOKEN,ID_ERROR);
+    if(verifierId(idfCourant) != TVAR)
+        erreur(NON_VAR);
     testSymbole(AFF_TOKEN,AFF_ERROR);
     expr();
 }
@@ -168,6 +180,8 @@ void lire()
     testSymbole(READ_TOKEN,READ_ERROR);
     testSymbole(PO_TOKEN,PO_ERROR);
     testSymbole(ID_TOKEN,ID_ERROR);
+    if(verifierId(idfCourant) != TVAR)
+        erreur(NON_VAR);
     while(symCour.code == VIR_TOKEN)
     {
         symSuiv();
@@ -244,5 +258,26 @@ void fact()
     default:
         erreur(FACT_ERROR);
         break;
+    }
+}
+
+void ajouterId(char* nom,TSYM type)
+{
+    for(int i=0;i<idfIndex;i++)
+    {
+        if(strcmp(nom,TAB_IDFS[i].NOM) == 0)
+            erreur(DOU_DEC);
+    }
+    strcpy(TAB_IDFS[idfIndex].NOM,nom);
+    TAB_IDFS[idfIndex].TIDF = type;
+    idfIndex++;
+}
+
+TSYM verifierId(char* nom)
+{
+    for(int i=0;i<idfCourant;i++)
+    {
+        if(strcmp(nom,TAB_IDFS[i].NOM) == 0)
+            return TAB_IDFS[i].TIDF;
     }
 }
