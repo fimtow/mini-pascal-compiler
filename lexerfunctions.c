@@ -37,7 +37,12 @@ char* messagesErr[] = {
     "Erreur de syntaxe : on expectait le mot cle READ",
     "Erreur de syntaxe : on expectait une condition",
     "Erreur de syntaxe : on expectait un facteur",
-    "Erreur de syntaxe : on expectait une instruction"
+    "Erreur de syntaxe : on expectait une instruction",
+    "Erreur semantique : double declaration",
+    "Erreur semantique : on ne peut affecter une valeur qu'a une variable",
+    "Erreur semantique : le nom du programme est non autorise",
+    "Erreur semantique : identificateur non declare",
+    "Commande errone : utiliser comme suit : parser nomprogramme"
 };
 
 void ouvrirFichier(char* file)

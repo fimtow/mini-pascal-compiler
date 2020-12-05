@@ -1,6 +1,7 @@
 #include "lexerfunctions.h"
 #include "parserfunctions.h"
 #include <string.h>
+#include <stdio.h>
 #define NBRIDFS 20
 T_TAB_IDF TAB_IDFS[NBRIDFS];
 int idfIndex = 0;
@@ -9,7 +10,7 @@ void testSymbole (codesLex cl, codesErr err){
     if(symCour.code == cl)
     {
         if(cl == ID_TOKEN)
-            strcpy(symCour.nom,idfCourant);
+            strcpy(idfCourant,symCour.nom);
         symSuiv();
     }
     else
@@ -245,6 +246,8 @@ void fact()
     switch (symCour.code)
     {
     case ID_TOKEN:
+        if(verifierId(symCour.nom) == TPROG)
+            erreur(IDF_PRO);
         symSuiv();
         break;
     case NUM_TOKEN:
@@ -263,6 +266,7 @@ void fact()
 
 void ajouterId(char* nom,TSYM type)
 {
+    printf("%s\n",nom);
     for(int i=0;i<idfIndex;i++)
     {
         if(strcmp(nom,TAB_IDFS[i].NOM) == 0)
@@ -275,9 +279,10 @@ void ajouterId(char* nom,TSYM type)
 
 TSYM verifierId(char* nom)
 {
-    for(int i=0;i<idfCourant;i++)
+    for(int i=0;i<idfIndex;i++)
     {
         if(strcmp(nom,TAB_IDFS[i].NOM) == 0)
             return TAB_IDFS[i].TIDF;
     }
+    erreur(NON_DEC);
 }

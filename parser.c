@@ -2,9 +2,11 @@
 #include "lexerfunctions.h"
 #include "parserfunctions.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    ouvrirFichier("pascal.p");
+    if(argc != 2)
+        erreur(ARG_ERR);
+    ouvrirFichier(argv[1]);
     premierSym();
     program();
     if(symCour.code == FIN_TOKEN)

@@ -62,7 +62,10 @@ typedef enum
     FACT_ERROR,
     INST_ERROR,
     DOU_DEC,
-    NON_VAR
+    NON_VAR,
+    IDF_PRO,
+    NON_DEC,
+    ARG_ERR
 } codesErr;
 typedef struct tSymCour
 {
