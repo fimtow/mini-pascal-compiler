@@ -1,7 +1,6 @@
 #include "lexerfunctions.h"
 #include "parserfunctions.h"
 #include <string.h>
-#include <stdio.h>
 #define NBRIDFS 20
 T_TAB_IDF TAB_IDFS[NBRIDFS];
 int idfIndex = 0;
@@ -266,7 +265,6 @@ void fact()
 
 void ajouterId(char* nom,TSYM type)
 {
-    printf("%s\n",nom);
     for(int i=0;i<idfIndex;i++)
     {
         if(strcmp(nom,TAB_IDFS[i].NOM) == 0)
