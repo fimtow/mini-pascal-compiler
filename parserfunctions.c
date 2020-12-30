@@ -186,6 +186,8 @@ void lire()
     {
         symSuiv();
         testSymbole(ID_TOKEN,ID_ERROR);
+        if(verifierId(idfCourant) != TVAR)
+            erreur(NON_VAR);
     }
     testSymbole(PF_TOKEN,PF_ERROR);
 }
